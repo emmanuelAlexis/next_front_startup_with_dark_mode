@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Next.js Startup Frontend with Dark Mode
+
+This repository is a small **Next.js startup frontend template** with **built‑in dark mode**, basic UI wiring, and sensible defaults. It is intended as a starting point for new projects: you get routing, theming, and a couple of reusable components so you can focus on product features instead of boilerplate.
+
+## Features
+
+- Next.js App Router (`src/app`), TypeScript, and React 19
+- Dark / light theme support via a `ThemeProvider`
+- Tailwind CSS v4 utilities for rapid styling
+- Reusable UI pieces like `DarkModeToggle` and input components
+- Toast notifications via [`sonner`](https://sonner.emilkowal.ski)
+- Modern tooling (Turbopack dev server, TypeScript, PostCSS)
+
+## Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Language**: TypeScript, React 19
+- **Styling**: Tailwind CSS 4, PostCSS
+- **Icons & animation helpers**: `lucide-react`, `framer-motion`, `react-icons`, `tw-animate-css`
+- **Theming**: Custom `ThemeProvider` in `src/providers/ThemeProvider.tsx`
+
+## Project Structure
+
+```text
+src/
+  app/
+    layout.tsx      # Root layout, wraps the app with ThemeProvider and Toaster
+    page.tsx        # Home page demonstrating dark mode toggles
+  components/
+    DarkModeToggle.tsx
+    Inputs.tsx
+  providers/
+    ThemeProvider.tsx
+```
+
+- `layout.tsx` registers the `ThemeProvider` and `Toaster` and sets basic layout styles.
+- `page.tsx` shows how to use the `DarkModeToggle` component in different variants.
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies (recommended: pnpm, but npm/yarn also work):
 
 ```bash
+# with pnpm
+pnpm install
+
+# or with npm
+npm install
+
+# or with yarn
+yarn install
+```
+
+Run the development server:
+
+```bash
+pnpm dev
+# or
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The main page is defined in `src/app/page.tsx`. Changes are hot‑reloaded in development.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Available Scripts
 
-## Learn More
+From the project root you can run:
 
-To learn more about Next.js, take a look at the following resources:
+- `pnpm dev` – start the dev server with Turbopack
+- `pnpm build` – create an optimized production build
+- `pnpm start` – run the production build
+- `pnpm lint` – run Next.js linting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you prefer npm or yarn, use the equivalent `npm run` / `yarn` commands.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Theming & Dark Mode
 
-## Deploy on Vercel
+- The global theming logic lives in `src/providers/ThemeProvider.tsx`.
+- `DarkModeToggle` (in `src/components/DarkModeToggle.tsx`) is the main control used on the home page.
+- Layout-level background and text colors come from Tailwind + theme classes applied in `layout.tsx` and `page.tsx` (`bg-background`, `text-foreground`, etc.).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To customize the look & feel:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Adjust global styles in `src/app/globals.css` and Tailwind configuration.
+- Extend or modify `ThemeProvider` to support additional themes.
+- Reuse `DarkModeToggle` in your own pages or components.
+
+## Customization Ideas
+
+- Replace the `Home` heading in `page.tsx` with your real landing content.
+- Add new routes under `src/app/` (e.g. `src/app/dashboard/page.tsx`).
+- Create more shared UI components in `src/components/` and reuse them across pages.
+
+## Deployment
+
+You can deploy this app to any platform that supports Node.js and Next.js, such as **Vercel**, **Netlify**, or your own infrastructure. A typical production flow is:
+
+```bash
+pnpm install
+pnpm build
+pnpm start
+```
+
+Refer to your hosting provider’s Next.js deployment guide for exact configuration.
